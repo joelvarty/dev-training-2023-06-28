@@ -5,6 +5,7 @@ import SiteHeader from "components/common/SiteHeader"
 
 import {GetStaticProps, GetStaticPaths} from "next"
 import { AgilityPageProps, ComponentWithInit } from "@agility/nextjs"
+import SiteFooter from "components/common/SiteFooter"
 
 // getStaticProps function fetches data for all of your Agility Pages and Next.js will pre-render these pages at build time
 
@@ -12,6 +13,7 @@ export const getStaticProps: GetStaticProps<AgilityPageProps> = async ({preview,
 	// place all global here
 	const globalComponents = {
 		header: SiteHeader as ComponentWithInit<{}>,
+		footer: SiteFooter as ComponentWithInit<{}>,
 	}
 
 	const agilityProps = await getAgilityPageProps({

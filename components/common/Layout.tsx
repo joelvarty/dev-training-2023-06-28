@@ -8,6 +8,7 @@ import SiteHeader from "./SiteHeader"
 import SiteFooter from "./SiteFooter"
 import LoadingWidget from "./LoadingWidget"
 import {useEffect, useState} from "react"
+import { Test } from "components/Test"
 
 interface Props {
 	page: any
@@ -47,6 +48,10 @@ function Layout(props: AgilityPageProps) {
 		page.seo.metaDescription = dynamicPageItem.seo.metaDescription
 	}
 
+	const bottomScript = page.scripts?.bottom || null
+	console.log("page", page)
+	console.log("bottomScript", bottomScript)
+
 	return (
 		<>
 			<SEO
@@ -59,6 +64,7 @@ function Layout(props: AgilityPageProps) {
 				{isPreviewRequested && <LoadingWidget message="Loading Preview Mode" />}
 				{!isPreviewRequested && (
 					<div id="site">
+
 						<PreviewBar {...{isDevelopmentMode, isPreview}} />
 						<div className="flex flex-col min-h-screen">
 							<SiteHeader {...props} />
@@ -66,8 +72,9 @@ function Layout(props: AgilityPageProps) {
 								{AgilityPageTemplate && <AgilityPageTemplate {...props} />}
 								{!AgilityPageTemplate && <div>The template {pageTemplateName} could not be found.</div>}
 							</main>
-							<SiteFooter />
+							<SiteFooter {...props} />
 						</div>
+
 					</div>
 				)}
 			</div>

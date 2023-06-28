@@ -3,12 +3,12 @@ import {AgilityImage, ImageField, Module, URLField} from "@agility/nextjs"
 import Link from "next/link"
 
 interface ITextBlockWithImage {
-	title: string
-	content: string
+	title?: string
+	content?: string
 	tagline?: string
-	imagePosition: "left" | "right"
-	image: ImageField
-	primaryButton: URLField
+	imagePosition?: "left" | "right"
+	image?: ImageField
+	primaryButton?: URLField
 	highPriority?: string
 }
 

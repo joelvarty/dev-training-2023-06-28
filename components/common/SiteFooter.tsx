@@ -1,3 +1,4 @@
+import { ComponentWithInit, CustomInitPropsArg } from "@agility/nextjs";
 import Image from "next/image";
 import React from "react";
 import { FaTwitter, FaInstagram, FaSlack, FaYoutube } from "react-icons/fa";
@@ -6,7 +7,12 @@ import { FaTwitter, FaInstagram, FaSlack, FaYoutube } from "react-icons/fa";
  * This footer is not part of the content in the CMS, feel free to remove this for production use.
  */
 
-const SiteFooter = () => {
+const SiteFooter: ComponentWithInit<string | null> = ({globalData, sitemapNode, page}) => {
+
+	const footer: any = globalData ? globalData["footer"] : null
+
+	console.log("globalData", globalData)
+
 	// set up Agility CMS Socials
 	const socials = [
 		{
@@ -44,25 +50,15 @@ const SiteFooter = () => {
 		<footer className="relative px-8 py-6 md:py-4 mt-8 bg-gray-100">
 			<div className="max-w-screen-xl mx-auto md:flex md:items-center">
 				<div className="text-center mb-4 md:mb-0 md:text-left flex-shrink-0 relative">
-					<a
-						href="https://www.agilitycms.com"
-						target="_blank"
-						rel="noreferrer"
-						title="Agility CMS"
-					>
-						<Image
-							src="/assets/agility-logo.svg"
-							alt="Agility CMS"
-							width={90}
-							height={24}
-						/>
+					<a href="https://www.agilitycms.com" target="_blank" rel="noreferrer" title="Agility CMS">
+						{footer } 123
+						<Image src="/assets/agility-logo.svg" alt="Agility CMS" width={90} height={24} />
 					</a>
 				</div>
 				<div className="flex-grow mb-4 md:mb-0">
 					<p className="text-center md:text-left text-gray-600 text-xs md:ml-8 md:max-w-3xl">
-						Powered by Agility CMS. This website and materials found on it are
-						for demo purposes. You can use this to preview the content you
-						created on your Agility CMS account.{"\u00A0"}
+						Powered by Agility CMS. This website and materials found on it are for demo purposes. You can use this to
+						preview the content you created on your Agility CMS account.{"\u00A0"}
 						<a
 							href="https://github.com/agility/agilitycms-nextjs-starter"
 							title="View on GitHub"
@@ -97,12 +93,7 @@ const SiteFooter = () => {
 					<ul className="flex justify-center md:justify-start">
 						{socials.map((social, index) => (
 							<li key={index} className="mx-4 md:mx-0">
-								<a
-									href={social.url}
-									title={`Follow Agility CMS on ${social.title}`}
-									target="_blank"
-									rel="noreferrer"
-								>
+								<a href={social.url} title={`Follow Agility CMS on ${social.title}`} target="_blank" rel="noreferrer">
 									{social.icon}
 								</a>
 							</li>
@@ -111,7 +102,14 @@ const SiteFooter = () => {
 				</div>
 			</div>
 		</footer>
-	);
+	)
 };
+
+
+SiteFooter.getCustomInitialProps = async function ({ agility, languageCode, channelName }: CustomInitPropsArg) {
+console.log("THIS IS THE FOOTER")
+	return "test xyz"
+
+}
 
 export default SiteFooter;
